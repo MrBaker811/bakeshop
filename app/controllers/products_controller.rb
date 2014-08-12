@@ -1,13 +1,14 @@
-class ChargesController < ApplicationController
-  def new
-  end
+class ProductsController < ApplicationController
 
-  def create
+def new
+end
+
+def create
   # Amount in cents
-  @amount = 4500
+  @amount = 50000
 
   customer = Stripe::Customer.create(
-    
+    :email => 'example@stripe.com',
     :card  => params[:stripeToken]
   )
 
@@ -20,6 +21,8 @@ class ChargesController < ApplicationController
 
 rescue Stripe::CardError => e
   flash[:error] = e.message
-  redirect_to charges_path
+  redirect_to products_path
 end
+
+
 end
